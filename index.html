@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="darkreader-lock">
+<title>Bauhaus</title>
+<meta name="description" content="The design system behind laudeman.io since September 2026. A poster, not a drawing.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jost@5/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jost@5/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jost@5/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jost@5/700.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jost@5/800.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jost@5/900.css">
+<link rel="stylesheet" href="tokens.css">
+<style>
+/* This page is built from tokens.css. It is the system demonstrating itself. */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  counter-reset:section;
+  margin:0;
+  font-family:var(--font-sans);
+  font-size:var(--step-0);
+  line-height:1.55;
+  color:var(--ink);
+  background:var(--paper) var(--paper-grain);
+}
+a{color:inherit;text-decoration:none;font-weight:600}
+a:hover{color:var(--rust)}
+a:focus-visible,button:focus-visible{outline:var(--rule-heavy) solid var(--ink);outline-offset:3px}
+code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.86em}
+p,li{max-width:64ch}
+
+/* the bar across the top: heavy rule, square mark, the one control */
+.nav{position:sticky;top:0;z-index:5;background:var(--paper) var(--paper-grain);border-bottom:var(--rule-heavy) solid var(--ink);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem clamp(16px,5vw,3rem)}
+.nav__mark{font-weight:var(--weight-heavy);letter-spacing:var(--track-label);text-transform:uppercase}
+.nav__mark b{display:inline-block;width:14px;height:14px;background:var(--rust);margin-right:8px;vertical-align:-1px}
+.lang button{font:inherit;font-size:var(--step--1);font-weight:600;letter-spacing:.08em;background:var(--paper);
+  color:var(--ink);cursor:pointer;border:var(--rule) solid var(--ink);padding:.2rem .6rem;border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:transform .08s,box-shadow .08s}
+.lang button:active{transform:translate(3px,3px);box-shadow:none}
+.lang{display:flex;gap:.5rem}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+.wrap{max-width:var(--measure);margin:0 auto;padding-inline:clamp(16px,5vw,3rem)}
+
+/* hero: asymmetric - heavy stacked name left, geometry right */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:5vw;align-items:end;
+  padding-block:var(--space-2xl) var(--space-xl);border-bottom:var(--rule-heavy) solid var(--ink)}
+.hero__name{font-size:var(--step-4);line-height:var(--leading-display);font-weight:var(--weight-heavy);text-transform:uppercase;
+  letter-spacing:var(--track-display);margin:0}
+.hero__eyebrow{color:var(--rust);text-transform:uppercase;letter-spacing:var(--track-label);font-size:var(--step--1);
+  font-weight:var(--weight-label);margin:var(--space-md) 0 var(--space-xs)}
+.hero__lead{font-size:var(--step-1);line-height:1.35;font-weight:500;max-width:30ch;margin:0}
+.geo{position:relative;justify-self:end;width:min(320px,34vw);aspect-ratio:1}
+.geo__sq{position:absolute;right:-18px;top:-18px;width:58%;height:58%;background:var(--rust)}
+.geo__circ{position:absolute;left:-22px;bottom:-22px;width:30%;height:30%;border-radius:50%;background:var(--ink)}
+.geo__disc{position:absolute;inset:0;border-radius:50%;background:var(--paper);border:var(--rule-heavy) solid var(--ink);box-shadow:var(--shadow-lg);
+  display:grid;place-items:center;text-align:center;font-size:var(--step--1);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--slate);font-weight:600;padding:18%}
+
+/* the numbers strip: data as the graphic */
+.figs{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:var(--rule-heavy) solid var(--ink)}
+.fig{padding:var(--space-md) var(--space-md) var(--space-md) 1.4rem;border-left:var(--rule-heavy) solid var(--ink)}
+.fig:first-child{border-left:0;padding-left:0}
+.fig__v{font-weight:var(--weight-heavy);font-size:var(--step-3);color:var(--rust);line-height:1;letter-spacing:var(--track-display)}
+.fig__k{font-size:var(--step--1);color:var(--slate);margin-top:.5rem}
+
+/* sections: oversized rust numeral in the rail, title across, content beside */
+section{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);column-gap:3vw;padding-top:var(--space-2xl)}
+section>*{grid-column:2}
+.section__title{counter-increment:section;grid-column:1/-1;display:flex;align-items:baseline;gap:1.4rem;
+  font-weight:var(--weight-heavy);font-size:var(--step-2);letter-spacing:var(--track-display);line-height:.95;text-transform:uppercase;margin:0 0 var(--space-md)}
+.section__title::before{content:counter(section,decimal-leading-zero);color:var(--rust);font-size:var(--numeral);
+  font-weight:var(--weight-heavy);letter-spacing:-.05em;line-height:.8;min-width:calc(var(--rail) - 1.4rem)}
+
+/* thesis bar: the one strongest statement, inverted */
+.thesis{background:var(--ink);color:var(--paper);padding:var(--space-md) var(--space-lg);font-size:var(--step-2);
+  line-height:1.2;font-weight:var(--weight-display);letter-spacing:-.02em;max-width:none;margin:0 calc(var(--space-sm) + 9px) calc(var(--space-md) + 9px) 0;box-shadow:var(--shadow-rust)}
+.closer{font-weight:var(--weight-display);font-size:var(--step-1);border-left:var(--rule-accent) solid var(--rust);padding-left:1rem}
+
+/* palette */
+.sw{display:grid;grid-template-columns:repeat(6,1fr);border:var(--rule-heavy) solid var(--ink);box-shadow:var(--shadow);margin-right:5px}
+.sw div{padding:var(--space-sm);border-right:var(--rule) solid var(--ink)}
+.sw div:last-child{border-right:0}
+.sw i{display:block;height:3rem;border:var(--rule) solid var(--ink);margin-bottom:.6rem}
+.sw b,.warn h3,code{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0,'dlig' 0}
+.sw b{display:block;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-weight:700;font-size:var(--step--1)}
+.sw span{display:block;font-size:.74rem;color:var(--slate);font-variant-numeric:tabular-nums}
+.sw em{display:block;font-style:normal;font-size:.74rem;color:var(--slate);margin-top:.35rem}
+
+ul.sq{list-style:none;padding:0}
+ul.sq li{position:relative;padding-left:1.4rem;margin-bottom:.55rem}
+ul.sq li::before{content:'';position:absolute;left:0;top:.55em;width:var(--bullet);height:var(--bullet);background:var(--rust)}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem;border-top:var(--rule-heavy) solid var(--ink)}
+th,td{text-align:left;padding:.6rem .7rem .6rem 0;border-bottom:var(--rule) solid var(--ink);vertical-align:top}
+th{font-size:var(--step--1);letter-spacing:var(--track-label);text-transform:uppercase;font-weight:var(--weight-heavy)}
+.tw{overflow-x:auto}
+
+.warn{border:var(--rule-heavy) solid var(--ink);border-left:var(--rule-accent) solid var(--rust);background:var(--paper);box-shadow:var(--shadow);padding:var(--space-sm) var(--space-md);margin:0 5px calc(var(--space-md) + 5px) 0}
+.warn h3{margin:0 0 .3rem;font-size:var(--step-1);font-weight:var(--weight-heavy);text-transform:uppercase;letter-spacing:var(--track-display)}
+.warn p{margin:.2rem 0}
+
+/* chips: square, ruled, uppercase */
+.chips{display:flex;flex-wrap:wrap;gap:.7rem;margin:var(--space-sm) 0}
+.chips span{border:var(--rule) solid var(--ink);padding:.15rem .6rem;font-size:var(--step--1);font-weight:var(--weight-label);
+  text-transform:uppercase;letter-spacing:var(--track-label);box-shadow:var(--shadow-sm);background:var(--paper)}
+
+footer{margin-top:var(--space-2xl);border-top:var(--rule-heavy) solid var(--ink);padding-block:var(--space-md) var(--space-xl);
+  font-size:var(--step--1);color:var(--slate)}
+footer p{margin:.3rem 0}
+
+html[data-lang='en'] [data-i='de']{display:none}
+html[data-lang='de'] [data-i='en']{display:none}
+
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr}.geo{justify-self:start;width:62vw;margin:var(--space-md) 0 0 22px}
+  .figs{grid-template-columns:1fr 1fr}.fig:nth-child(3){border-left:0;padding-left:0}
+  .fig:nth-child(n+3){border-top:var(--rule-heavy) solid var(--ink)}
+  section{grid-template-columns:1fr}section>*{grid-column:1}
+  .section__title::before{min-width:0}
+  .sw{grid-template-columns:1fr 1fr}.sw div{border-right:0;border-bottom:var(--rule) solid var(--ink)}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav__mark"><b></b>Bauhaus</span>
+  <span class="lang"><button id="b-en" aria-pressed="true" onclick="setLang('en')">EN</button><button
+    id="b-de" aria-pressed="false" onclick="setLang('de')">DE</button></span>
+</nav>
+
+<div class="wrap">
+
+<header class="hero">
+  <div>
+    <h1 class="hero__name">Bau<br>haus</h1>
+    <p class="hero__eyebrow"><span data-i="en">The design system behind laudeman.io</span><span data-i="de">Das Designsystem hinter laudeman.io</span></p>
+    <p class="hero__lead"><span data-i="en">A poster, not a drawing. Three colours, two shapes, one typeface, and heavy rules doing the work ornament used to do.</span><span data-i="de">Ein Plakat, keine Zeichnung. Drei Farben, zwei Formen, eine Schrift, und kräftige Linien, die die Arbeit machen, die früher das Ornament gemacht hat.</span></p>
+  </div>
+  <div class="geo" role="img" aria-label="The composition: a rust square top right, a black circle bottom left, a round frame between them">
+    <div class="geo__sq"></div><div class="geo__circ"></div>
+    <div class="geo__disc"><span data-i="en">portrait goes here, in grayscale</span><span data-i="de">hier das Porträt, in Graustufen</span></div>
+  </div>
+</header>
+
+<div class="figs">
+  <div class="fig"><div class="fig__v">3</div><div class="fig__k"><span data-i="en">colours: ink, paper, rust</span><span data-i="de">Farben: Tinte, Papier, Rost</span></div></div>
+  <div class="fig"><div class="fig__v">2</div><div class="fig__k"><span data-i="en">shapes: square, circle</span><span data-i="de">Formen: Quadrat, Kreis</span></div></div>
+  <div class="fig"><div class="fig__v">1</div><div class="fig__k"><span data-i="en">typeface family</span><span data-i="de">Schriftfamilie</span></div></div>
+  <div class="fig"><div class="fig__v">0</div><div class="fig__k"><span data-i="en">blurred shadows, gradients, rounded corners</span><span data-i="de">weiche Schatten, Verläufe, runde Ecken</span></div></div>
+</div>
+
+<section>
+  <h2 class="section__title"><span data-i="en">The idea</span><span data-i="de">Die Idee</span></h2>
+  <p class="thesis"><span data-i="en">Form follows function, built from primary parts.</span><span data-i="de">Die Form folgt der Funktion, gebaut aus Grundelementen.</span></p>
+  <p><span data-i="en">The Bauhaus (Weimar 1919, Dessau 1925, briefly Berlin until 1933) stripped design down to geometric shapes, a few strong colours, and type used as structure rather than decoration. Every element had to earn its place. This system takes that vocabulary and mixes in the Swiss and constructivist poster traditions that grew out of it. <b>Bauhaus-inspired, not textbook Bauhaus</b>, and the departures are listed below rather than hidden.</span><span data-i="de">Das Bauhaus (Weimar 1919, Dessau 1925, kurz Berlin bis 1933) hat Gestaltung auf geometrische Formen, wenige starke Farben und Schrift als Struktur statt Dekoration reduziert. Jedes Element musste seinen Platz verdienen. Dieses System übernimmt dieses Vokabular und mischt die Schweizer und konstruktivistische Plakattradition dazu, die daraus hervorgegangen ist. <b>Vom Bauhaus inspiriert, kein Lehrbuch-Bauhaus</b>, und die Abweichungen stehen unten, statt versteckt zu werden.</span></p>
+  <div class="tw"><table>
+    <thead><tr><th><span data-i="en">Principle</span><span data-i="de">Prinzip</span></th><th><span data-i="en">Where it shows up</span><span data-i="de">Wo es sich zeigt</span></th></tr></thead>
+    <tbody>
+      <tr><td><span data-i="en">Primary geometry</span><span data-i="de">Grundformen</span></td><td><span data-i="en">Portrait circle, rust square, black circle</span><span data-i="de">Porträtkreis, Rostquadrat, schwarzer Kreis</span></td></tr>
+      <tr><td><span data-i="en">Few colours, used as signals</span><span data-i="de">Wenige Farben, als Signal</span></td><td><span data-i="en">Ink and one rust accent on paper</span><span data-i="de">Tinte und ein Rost-Akzent auf Papier</span></td></tr>
+      <tr><td><span data-i="en">Geometric sans</span><span data-i="de">Geometrische Grotesk</span></td><td><span data-i="en">Futura in print, Jost on screen</span><span data-i="de">Futura im Druck, Jost am Bildschirm</span></td></tr>
+      <tr><td><span data-i="en">Asymmetric, grid-built layout</span><span data-i="de">Asymmetrisches Raster</span></td><td><span data-i="en">Heavy name left, geometry right; a numeral rail beside every section</span><span data-i="de">Schwerer Name links, Geometrie rechts; eine Ziffernspalte neben jedem Abschnitt</span></td></tr>
+      <tr><td><span data-i="en">Type as structure</span><span data-i="de">Schrift als Struktur</span></td><td><span data-i="en">Stacked name, oversized numerals, 3px rules</span><span data-i="de">Gestapelter Name, übergroße Ziffern, 3px-Linien</span></td></tr>
+      <tr><td><span data-i="en">Function over ornament</span><span data-i="de">Funktion vor Ornament</span></td><td><span data-i="en">The numbers strip carries information, not decoration</span><span data-i="de">Die Zahlenleiste trägt Information, keine Dekoration</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2 class="section__title"><span data-i="en">The palette</span><span data-i="de">Die Palette</span></h2>
+  <div class="sw">
+    <div><i style="background:#141414"></i><b>--ink</b><span>#141414 · 15,91:1</span>
+      <em data-i="en">type, rules, the circle</em><em data-i="de">Schrift, Linien, der Kreis</em></div>
+    <div><i style="background:#f2eee5"></i><b>--paper</b><span>#f2eee5</span>
+      <em data-i="en">ground - warm, not white</em><em data-i="de">Grund - warm, nicht weiß</em></div>
+    <div><i style="background:#b5462f"></i><b>--rust</b><span>#b5462f · 4,67:1</span>
+      <em data-i="en">the one accent</em><em data-i="de">der einzige Akzent</em></div>
+    <div><i style="background:#e07a5f"></i><b>--rust-on-ink</b><span>#e07a5f · 6,24:1</span>
+      <em data-i="en">rust on an inverted block</em><em data-i="de">Rost auf invertierter Fläche</em></div>
+    <div><i style="background:#4a4640"></i><b>--slate</b><span>#4a4640 · 8,09:1</span>
+      <em data-i="en">secondary, metadata</em><em data-i="de">Sekundär, Metadaten</em></div>
+    <div><i style="background:#cfc8ba"></i><b>--hairline</b><span>#cfc8ba</span>
+      <em data-i="en">the rare light rule</em><em data-i="de">die seltene helle Linie</em></div>
+  </div>
+  <p style="color:var(--slate);font-size:var(--step--1)"><span data-i="en">Ratios are WCAG contrast against <code>--paper</code> (<code>--rust-on-ink</code> against <code>--ink</code>).</span><span data-i="de">Die Werte sind WCAG-Kontrast gegen <code>--paper</code> (<code>--rust-on-ink</code> gegen <code>--ink</code>).</span></p>
+</section>
+
+<section>
+  <h2 class="section__title"><span data-i="en">The choices</span><span data-i="de">Die Entscheidungen</span></h2>
+  <ul class="sq">
+    <li><span data-i="en"><b>Square and circle.</b> Kandinsky's 1923 Bauhaus questionnaire paired the square with red, the circle with blue, the triangle with yellow. The rust square follows him. The circle is black on purpose: blue is out of this palette.</span><span data-i="de"><b>Quadrat und Kreis.</b> Kandinskys Bauhaus-Fragebogen von 1923 ordnete das Quadrat dem Rot zu, den Kreis dem Blau, das Dreieck dem Gelb. Das Rostquadrat folgt ihm. Der Kreis ist bewusst schwarz: Blau gibt es in dieser Palette nicht.</span></li>
+    <li><span data-i="en"><b>Rust, not Bauhaus red.</b> The original primaries are saturated. Rust reads like oxidised Bauhaus red: the same signal, turned down to an earth tone.</span><span data-i="de"><b>Rost statt Bauhaus-Rot.</b> Die originalen Grundfarben sind gesättigt. Rost liest sich wie oxidiertes Bauhaus-Rot: dasselbe Signal, auf einen Erdton heruntergedreht.</span></li>
+    <li><span data-i="en"><b>Warm paper, not white.</b> It reads as print, glares less, and sits apart from the white corporate page.</span><span data-i="de"><b>Warmes Papier statt Weiß.</b> Wirkt wie Druck, blendet weniger und hebt sich von der weißen Konzernseite ab.</span></li>
+    <li><span data-i="en"><b>Futura, and Jost.</b> Futura (Paul Renner, 1927) is the geometric sans of the era. Renner was never at the Bauhaus, but it is the face everyone associates with it. Jost is its open-source web cousin, self-hosted so no German visitor's IP goes to a font CDN on the live site.</span><span data-i="de"><b>Futura, und Jost.</b> Futura (Paul Renner, 1927) ist die geometrische Grotesk der Epoche. Renner war nie am Bauhaus, aber jeder verbindet die Schrift damit. Jost ist ihr quelloffener Web-Verwandter, auf der Live-Site selbst gehostet, damit keine IP eines deutschen Besuchers an ein Font-CDN geht.</span></li>
+    <li><span data-i="en"><b>Grayscale portrait.</b> So the accent stays the only colour on the page.</span><span data-i="de"><b>Porträt in Graustufen.</b> Damit der Akzent die einzige Farbe auf der Seite bleibt.</span></li>
+    <li><span data-i="en"><b>The numbers strip.</b> The most Bauhaus choice in spirit: the data is the design. A figure appears only if the page's own text states it.</span><span data-i="de"><b>Die Zahlenleiste.</b> Im Geist die bauhausigste Entscheidung: Die Daten sind das Design. Eine Zahl erscheint nur, wenn der Text der Seite sie selbst nennt.</span></li>
+    <li><span data-i="en"><b>No underlined links.</b> The bold name is the link. An underline is ornament.</span><span data-i="de"><b>Keine unterstrichenen Links.</b> Der fette Name ist der Link. Eine Unterstreichung ist Ornament.</span></li>
+  </ul>
+  <p class="closer"><span data-i="en">Few colours, few shapes, nothing decorative.</span><span data-i="de">Wenige Farben, wenige Formen, nichts Dekoratives.</span></p>
+</section>
+
+<section>
+  <h2 class="section__title"><span data-i="en">Where it departs</span><span data-i="de">Wo es abweicht</span></h2>
+  <div class="tw"><table>
+    <thead><tr><th><span data-i="en">Departure</span><span data-i="de">Abweichung</span></th><th><span data-i="en">Why</span><span data-i="de">Warum</span></th></tr></thead>
+    <tbody>
+      <tr><td><span data-i="en">Rust instead of primary red</span><span data-i="de">Rost statt Grundrot</span></td><td><span data-i="en">No bright colours, anywhere</span><span data-i="de">Keine grellen Farben, nirgends</span></td></tr>
+      <tr><td><span data-i="en">Warm paper instead of white</span><span data-i="de">Warmes Papier statt Weiß</span></td><td><span data-i="en">Print feel, less glare</span><span data-i="de">Druckgefühl, weniger Blendung</span></td></tr>
+      <tr><td><span data-i="en">Uppercase display name</span><span data-i="de">Name in Versalien</span></td><td><span data-i="en">The least Bauhaus choice. Herbert Bayer pushed for all lowercase; uppercase is Swiss and constructivist poster hierarchy, so the eye lands on the name first.</span><span data-i="de">Die am wenigsten bauhausige Entscheidung. Herbert Bayer wollte alles klein; Versalien sind Schweizer und konstruktivistische Plakathierarchie, damit das Auge zuerst auf dem Namen landet.</span></td></tr>
+      <tr><td><span data-i="en">Hard offset shadows</span><span data-i="de">Harte versetzte Schatten</span></td><td><span data-i="en">Not Bauhaus at all: a neo-brutalist web move. Kept because a solid offset block reads as print (a second pass through the press), not as the soft depth the system rejects.</span><span data-i="de">Überhaupt nicht Bauhaus: ein neobrutalistischer Web-Kniff. Bleibt, weil ein voller versetzter Block wie Druck wirkt (ein zweiter Durchgang durch die Presse), nicht wie die weiche Tiefe, die das System ablehnt.</span></td></tr>
+      <tr><td><span data-i="en">Black circle instead of blue</span><span data-i="de">Schwarzer Kreis statt Blau</span></td><td><span data-i="en">Blue is not in the palette</span><span data-i="de">Blau ist nicht in der Palette</span></td></tr>
+      <tr><td><span data-i="en">No square without a portrait</span><span data-i="de">Kein Quadrat ohne Porträt</span></td><td><span data-i="en">On a document with no photo the square had no job, so it goes</span><span data-i="de">Auf einem Dokument ohne Foto hatte das Quadrat keine Aufgabe, also fällt es weg</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2 class="section__title"><span data-i="en">Four things that will bite you</span><span data-i="de">Vier Dinge, die Sie einholen werden</span></h2>
+  <div class="warn"><h3><code style="font-size:.8em">--rust</code></h3>
+    <p><span data-i="en">It sits at <b>4.67:1</b> on <code>--paper</code>, which clears WCAG AA for body text by a hair. Lighten it at all and small rust text fails. Use it for numerals, shapes and bold display type, not running text.</span><span data-i="de">Es liegt bei <b>4,67:1</b> auf <code>--paper</code> und besteht WCAG AA für Fließtext nur knapp. Wer es aufhellt, lässt kleinen Rost-Text durchfallen. Für Ziffern, Formen und fette Display-Schrift, nicht für Fließtext.</span></p></div>
+  <div class="warn"><h3><span data-i="en">Focus is ink, not rust</span><span data-i="de">Fokus ist Tinte, nicht Rost</span></h3>
+    <p><span data-i="en">Rust is red-family. A rust focus ring reads as an error state. Focus is <code>--ink</code> at <code>--rule-heavy</code>, the same weight as every structural rule. Tab through this page to see it.</span><span data-i="de">Rost gehört zur Rot-Familie. Ein rostfarbener Fokusring liest sich als Fehlerzustand. Fokus ist <code>--ink</code> in <code>--rule-heavy</code>, dieselbe Stärke wie jede tragende Linie. Mit Tab durch diese Seite, dann sieht man es.</span></p></div>
+  <div class="warn"><h3><span data-i="en">Hard shadows need room</span><span data-i="de">Harte Schatten brauchen Platz</span></h3>
+    <p><span data-i="en">The offset sits outside the box. Inside an <code>overflow: auto</code> wrapper it gets clipped, and flush against a neighbour it collides. Leave the offset as margin on the right and bottom.</span><span data-i="de">Der Versatz liegt außerhalb der Box. In einem <code>overflow: auto</code>-Wrapper wird er abgeschnitten, und bündig am Nachbarn kollidiert er. Den Versatz rechts und unten als Margin freihalten.</span></p></div>
+  <div class="warn"><h3><span data-i="en">The grayscale filter</span><span data-i="de">Der Graustufen-Filter</span></h3>
+    <p><span data-i="en">Put the square and circle inside the filtered portrait, or draw the circle as its <code>box-shadow</code>, and the filter drains the rust out of them too. Keep them as <b>siblings</b> of the image. This happened once.</span><span data-i="de">Legt man Quadrat und Kreis ins gefilterte Porträt oder zeichnet den Kreis als dessen <code>box-shadow</code>, zieht der Filter auch ihnen den Rost ab. Sie bleiben <b>Geschwister</b> des Bildes. Das ist einmal passiert.</span></p></div>
+</section>
+
+<section>
+  <h2 class="section__title"><span data-i="en">Rules</span><span data-i="de">Regeln</span></h2>
+  <ul class="sq">
+    <li><span data-i="en"><b>One accent.</b> Rust, and nothing else. A second accent collapses the signal.</span><span data-i="de"><b>Ein Akzent.</b> Rost, sonst nichts. Ein zweiter Akzent zerstört das Signal.</span></li>
+    <li><span data-i="en"><b>Weight is hierarchy.</b> 3px for frames and breaks, 1.5px for chips and table rows, 6px rust beside one closing line.</span><span data-i="de"><b>Stärke ist Hierarchie.</b> 3px für Rahmen und Brüche, 1,5px für Chips und Tabellenzeilen, 6px Rost neben einer Schlusszeile.</span></li>
+    <li><span data-i="en"><b>Square corners.</b> <code>--radius: 0</code>. The circle is the only curve.</span><span data-i="de"><b>Eckige Ecken.</b> <code>--radius: 0</code>. Der Kreis ist die einzige Rundung.</span></li>
+    <li><span data-i="en"><b>Hard shadows only.</b> Solid ink, offset, zero blur: a second printed block, not depth. No gradients.</span><span data-i="de"><b>Nur harte Schatten.</b> Volle Tinte, versetzt, null Weichzeichnung: ein zweiter gedruckter Block, keine Tiefe. Keine Verläufe.</span></li>
+    <li><span data-i="en"><b>Heavy and tight, light and open.</b> Display type at 900, tracked tight. Small uppercase labels at 700, tracked open. Never the other way round.</span><span data-i="de"><b>Schwer und eng, leicht und offen.</b> Display-Schrift in 900, eng gesetzt. Kleine Versal-Label in 700, offen gesetzt. Nie umgekehrt.</span></li>
+    <li><span data-i="en"><b>Uppercase is for display and labels.</b> Never running text.</span><span data-i="de"><b>Versalien für Display und Label.</b> Nie für Fließtext.</span></li>
+    <li><span data-i="en"><b>A number is earned.</b> The strip shows only figures the text states.</span><span data-i="de"><b>Eine Zahl muss verdient sein.</b> Die Leiste zeigt nur Zahlen, die der Text nennt.</span></li>
+  </ul>
+  <div class="chips"><span>chip</span><span>ruled</span><span>square</span><span>uppercase</span></div>
+</section>
+
+<section>
+  <h2 class="section__title"><span data-i="en">How this page is built</span><span data-i="de">Wie diese Seite gebaut ist</span></h2>
+  <p><code>&lt;link rel="stylesheet" href="tokens.css"&gt;</code></p>
+  <p><span data-i="en">The same values drive laudeman.io and documents printed from HTML. On paper the display face switches to Futura (<code>--font-print</code>). On screen it is <a href="https://github.com/indestructible-type/Jost">Jost</a>, open source under the SIL Open Font License.</span><span data-i="de">Dieselben Werte treiben laudeman.io und Dokumente, die aus HTML gedruckt werden. Auf Papier wechselt die Display-Schrift zu Futura (<code>--font-print</code>). Am Bildschirm ist es <a href="https://github.com/indestructible-type/Jost">Jost</a>, quelloffen unter der SIL Open Font License.</span></p>
+  <p><span data-i="en">It is an alternate to <a href="https://paullaudeman.github.io/blueprint-design-system/">Blueprint</a>, the engineering-drawing system. Same content, two readings: that one is a drawing, this one is a poster.</span><span data-i="de">Es ist eine Alternative zu <a href="https://paullaudeman.github.io/blueprint-design-system/">Blueprint</a>, dem System im Stil einer technischen Zeichnung. Derselbe Inhalt, zwei Lesarten: das eine ist eine Zeichnung, dieses ein Plakat.</span></p>
+</section>
+
+<footer>
+  <p><span data-i="en">Recorded September 2026</span><span data-i="de">Aufgezeichnet im September 2026</span></p>
+  <p><span data-i="en">&copy; 2026 Paul Laudeman &middot; all rights reserved &middot;
+    <a href="https://github.com/paullaudeman/bauhaus-design-system/blob/main/LICENSE">licensing</a></span>
+    <span data-i="de">&copy; 2026 Paul Laudeman &middot; alle Rechte vorbehalten &middot;
+    <a href="https://github.com/paullaudeman/bauhaus-design-system/blob/main/LICENSE">Lizenzierung</a></span></p>
+  <p><span data-i="en">Type: <a href="https://github.com/indestructible-type/Jost">Jost</a> &middot; SIL Open Font License</span>
+    <span data-i="de">Schrift: <a href="https://github.com/indestructible-type/Jost">Jost</a> &middot; SIL Open Font License</span></p>
+  <p><a href="https://laudeman.io">laudeman.io</a> &middot;
+     <a href="https://github.com/paullaudeman/bauhaus-design-system">source</a></p>
+</footer>
+
+</div>
+
+<script>
+function setLang(l){
+  document.documentElement.setAttribute('data-lang',l);
+  document.documentElement.lang=l;
+  document.getElementById('b-en').setAttribute('aria-pressed',String(l==='en'));
+  document.getElementById('b-de').setAttribute('aria-pressed',String(l==='de'));
+  try{localStorage.setItem('kbLang',l)}catch(e){}
+}
+(function(){
+  var l=null;
+  try{l=localStorage.getItem('kbLang')}catch(e){}
+  if(!l){l=(navigator.languages&&navigator.languages[0]||navigator.language||'en')
+    .toLowerCase().indexOf('de')===0?'de':'en'}
+  setLang(l);
+})();
+</script>
+</body>
+</html>

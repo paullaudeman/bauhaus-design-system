@@ -1,0 +1,92 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Bauhaus - design tokens
+   Geometric sans, one rust accent on warm paper, hard black rules,
+   square and circle as composition. A poster, not a drawing.
+
+   Three colours carry the whole system: ink, paper, rust. Everything else
+   is a tint of one of them.
+
+   Notes that will bite you:
+     --rust sits at 4.67:1 on --paper. That clears WCAG AA for body text by
+     a hair. Lighten it and small rust text fails. Use it for large or bold
+     type, numerals and shapes, not for running text.
+
+     --rust is red-family, so it is NOT the focus colour. A rust focus ring
+     reads as an error state. Focus is --ink, 3px, like every heavy rule.
+
+     Shadows are HARD: solid ink, offset, zero blur - a second printed block,
+     not depth. A blurred shadow is off-system. Hard shadows need room: inside
+     an overflow:auto wrapper they get clipped, so leave the offset as margin.
+
+     The portrait is grayscale so the accent stays the only colour. Keep the
+     square and circle as SIBLINGS of the filtered image, never children or
+     shadows of it, or the filter drains the rust out of them too.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* --- Design tokens --- */
+:root {
+  /* Palette - ink, paper, rust */
+  --ink: #141414;          /* type, rules, the circle, inverted blocks  15.91:1 */
+  --paper: #f2eee5;        /* ground - warm, print-like, not white */
+  --rust: #b5462f;         /* the one accent: square, numerals, bullets  4.67:1 */
+  --rust-on-ink: #e07a5f;  /* rust where the ground is ink  6.24:1 */
+  --slate: #4a4640;        /* secondary text, metadata  8.09:1 */
+  --hairline: #cfc8ba;     /* the rare light rule */
+
+  /* paper grain - procedural SVG noise, lightly dusted over --paper. Ours, not
+     an image: no file, no licence, about 400 bytes. Raise the 0.08 to dust
+     more, never past 0.14 or the paper reads as dirty. */
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* type - Jost on screen (drawn after Futura, SIL OFL); Futura in print */
+  --font-sans: 'Jost', 'Futura', 'Avenir Next', -apple-system, 'Segoe UI',
+    Helvetica, Arial, sans-serif;
+  --font-print: 'Futura', 'Jost', 'Avenir Next', sans-serif;      /* display, PDF */
+  --font-print-body: 'Avenir Next', 'Jost', Avenir, sans-serif;   /* body, PDF */
+
+  /* weight and tracking - display type is heavy and tight, labels stay open */
+  --weight-body: 400;
+  --weight-label: 700;
+  --weight-display: 800;
+  --weight-heavy: 900;          /* the name, numerals, figures */
+  --track-display: -0.045em;    /* uppercase display, set tight */
+  --track-label: 0.1em;         /* small uppercase labels, set open */
+  --leading-display: 0.86;
+
+  /* fluid type scale - steep at the top, because the name is a poster */
+  --step--1: clamp(0.8rem, 0.76rem + 0.18vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.22vw, 1.1rem);
+  --step-1: clamp(1.2rem, 1.08rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.25rem + 1.1vw, 2.2rem);
+  --step-3: clamp(2.2rem, 1.6rem + 2.8vw, 3.6rem);
+  --step-4: clamp(3.5rem, 2rem + 7vw, 8.25rem);    /* the stacked name */
+  --numeral: clamp(3rem, 2.2rem + 3vw, 4.5rem);     /* section numerals */
+
+  /* rules - weight is the hierarchy, not colour */
+  --rule-heavy: 3px;       /* frames, section breaks, the nav, focus */
+  --rule: 1.5px;           /* chips, table heads */
+  --rule-accent: 6px;      /* the one rust bar beside a closing line */
+
+  /* hard shadows - offset print blocks, never blurred */
+  --shadow-sm: 3px 3px 0 var(--ink);    /* chips, buttons */
+  --shadow: 5px 5px 0 var(--ink);       /* cards, blocks */
+  --shadow-lg: 9px 9px 0 var(--ink);    /* the one hero element */
+  --shadow-rust: 9px 9px 0 var(--rust); /* the thesis bar only */
+
+  /* shape */
+  --radius: 0;             /* squares are square; only the circle is round */
+  --bullet: 0.55rem;       /* square rust bullet */
+
+  /* spacing */
+  --space-scale: 1;
+  --space-xs: calc(0.5rem * var(--space-scale));
+  --space-sm: calc(0.85rem * var(--space-scale));
+  --space-md: calc(1.4rem * var(--space-scale));
+  --space-lg: calc(2.2rem * var(--space-scale));
+  --space-xl: calc(3.4rem * var(--space-scale));
+  --space-2xl: calc(5.5rem * var(--space-scale));
+
+  /* layout - asymmetric: a numeral rail on the left, content beside it */
+  --measure: 74rem;
+  --rail: 10rem;
+}
