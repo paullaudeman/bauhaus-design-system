@@ -45,7 +45,7 @@ constructivist poster traditions that grew out of it.
 |-----------|-------------------|
 | Primary geometry | Portrait circle, rust square, black circle |
 | Few colours, used as signals | Ink and one rust accent on paper |
-| Geometric sans | Futura in print, Jost on screen |
+| Geometric sans | Jost, drawn after Futura |
 | Asymmetric, grid-built layout | Heavy name left, geometry right; a numeral rail beside every section |
 | Type as structure | Stacked name, oversized numerals, 3px rules |
 | Function over ornament | The numbers strip carries information, not decoration |
