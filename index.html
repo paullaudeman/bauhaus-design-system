@@ -25,7 +25,7 @@ body{
   font-size:var(--step-0);
   line-height:1.55;
   color:var(--ink);
-  background:var(--paper) var(--paper-grain);
+  background-color:var(--paper);background-image:var(--paper-grain);background-size:300px 300px;
 }
 a{color:inherit;text-decoration:none;font-weight:600}
 a:hover{color:var(--rust)}
@@ -34,7 +34,7 @@ code{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.86em}
 p,li{max-width:64ch}
 
 /* the bar across the top: heavy rule, square mark, the one control */
-.nav{position:sticky;top:0;z-index:5;background:var(--paper) var(--paper-grain);border-bottom:var(--rule-heavy) solid var(--ink);
+.nav{position:sticky;top:0;z-index:5;background-color:var(--paper);background-image:var(--paper-grain);background-size:300px 300px;border-bottom:var(--rule-heavy) solid var(--ink);
   display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem clamp(16px,5vw,3rem)}
 .nav__mark{font-weight:var(--weight-heavy);letter-spacing:var(--track-label);text-transform:uppercase}
 .nav__mark b{display:inline-block;width:14px;height:14px;background:var(--rust);margin-right:8px;vertical-align:-1px}

@@ -33,10 +33,13 @@
   --slate: #4a4640;        /* secondary text, metadata  8.09:1 */
   --hairline: #cfc8ba;     /* the rare light rule */
 
-  /* paper dust - procedural SVG, two layers over --paper: a faint mottle (alpha .05)
-     and sparse dark specks (noise thresholded at .80, about 0.2% of the page).
-     Ours, not an image. Lower the -24 to dust more; below about -22 it reads as dirty. */
-  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27300%27%3E%3Cfilter id=%27m%27 x=%270%27 y=%270%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.8%27 numOctaves=%273%27 seed=%273%27 stitchTiles=%27stitch%27/%3E%3CfeColorMatrix values=%270 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .05 0%27/%3E%3C/filter%3E%3Cfilter id=%27d%27 x=%270%27 y=%270%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.7%27 numOctaves=%272%27 seed=%277%27 stitchTiles=%27stitch%27/%3E%3CfeColorMatrix values=%270 0 0 0 .22 0 0 0 0 .19 0 0 0 0 .15 30 0 0 0 -24%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url%28%23m%29%27/%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url%28%23d%29%27/%3E%3C/svg%3E");
+  /* paper dust - two layers over --paper: sparse flecks and short fibres drawn
+     once by Pillow into paper-dust.png (seeded, reproducible), over a faint SVG
+     mottle. The flecks are raster on purpose: SVG noise renders at device pixels,
+     so on a Retina screen each speck halves and vanishes. Tile at 300px. */
+  --paper-dust: url("paper-dust.png");   /* 600px PNG drawn at 2x by Pillow, shown at 300px: flecks survive Retina */
+  --paper-mottle: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27300%27%3E%3Cfilter id=%27m%27 x=%270%27 y=%270%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.8%27 numOctaves=%273%27 seed=%273%27 stitchTiles=%27stitch%27/%3E%3CfeColorMatrix values=%270 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .22 0 0 0 .05 0%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url%28%23m%29%27/%3E%3C/svg%3E");
+  --paper-grain: var(--paper-dust), var(--paper-mottle);
 
   /* type - Jost on screen and in print (drawn after Futura, SIL OFL); Futura is the fallback */
   --font-sans: 'Jost', 'Futura', 'Avenir Next', -apple-system, 'Segoe UI',
