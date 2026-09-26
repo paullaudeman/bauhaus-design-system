@@ -9,7 +9,7 @@ same content, two readings. That one is a drawing, this one is a poster.
 
 ### → [See the system](https://paullaudeman.github.io/bauhaus-design-system/)
 
-That page is built from this repo's own `tokens.css`. The grain under it is the real
+That page is built from this repo's own `tokens.css`. The dust under it is the real
 `--paper-grain`, the shadows are the real `--shadow-*`, and if you tab through it the focus rings are
 the real `--ink`. It is the system demonstrating itself, not a picture of it. EN/DE.
 
@@ -57,8 +57,8 @@ constructivist poster traditions that grew out of it.
   purpose: blue is out of this palette.
 - **Rust, not Bauhaus red.** Rust reads like oxidised Bauhaus red: the same signal, turned down to an
   earth tone.
-- **Warm paper, lightly dusted.** It reads as print and glares less. The grain is procedural SVG
-  noise, about 400 bytes, not an image.
+- **Warm paper, lightly dusted.** It reads as print and glares less. The dust is procedural SVG:
+  a faint mottle plus sparse dark specks from thresholded noise. Not an image, no licence.
 - **Futura, and Jost.** Futura (Paul Renner, 1927) is the geometric sans of the era. Renner was never
   at the Bauhaus, but it is the face everyone associates with it. Jost is its open-source web cousin.
 - **Heavy and tight, light and open.** Display type at 900, tracked tight. Small uppercase labels at
@@ -111,8 +111,8 @@ image.
 <link rel="stylesheet" href="tokens.css">
 ```
 
-On screen the type is [Jost](https://github.com/indestructible-type/Jost), open source under the SIL
-Open Font License. In print the display face switches to Futura (`--font-print`).
+The type is [Jost](https://github.com/indestructible-type/Jost), open source under the SIL Open Font
+License, on screen and in print. Futura stays in the stack as the fallback it was drawn after.
 
 ## License
 
